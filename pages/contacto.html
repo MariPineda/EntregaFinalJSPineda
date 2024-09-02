@@ -3,52 +3,61 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Sitio web Biblioteca Municipal. Variedad de libros y talleres.">
-    <meta name="keywords" content="biblioteca, libros, talleres, comunidad, municipal">
-    <title>Proyecto JavaScript Biblioteca Municipal</title>
+    <meta name="description" content="Biblioteca en Lujan de Cuyo, Mendoza. Consulta con nosotros por libros y talleres.">
+    <meta name="keywords" content="libros, talleres, consultas, Lujan de Cuyo">
+    <title>Contacto</title>
 </head>
 <body>
     <header>
         <nav>
+            <a href="../index.html">Biblioteca Municipal</a>
             <ul>
                 <li>
-                    <a href="./pages/nosotros.html">Nosotros</a>
+                    <a href="./nosotros.html">Nosotros</a>
                 </li>
                 <li>
-                    <a href="./pages/libros.html">Libros</a>
+                    <a href="./libros.html">Libros</a>
                 </li>
                 <li>
-                    <a href="./pages/talleres.html">Talleres</a>
+                    <a href="./talleres.html">Talleres</a>
                 </li>
                 <li>
-                    <a href="./pages/contacto.html">Contacto</a>
+                    <a href="./contacto.html">Contacto</a>
                 </li>
             </ul>
         </nav>
     </header>
     <main>
         <section>
-            <h1>Biblioteca Municipal</h1>
-            <p>Disponibilidad de libros y talleres para todas las edades. Una manera divertida de conocer e interactuar con la comunidad.</p>
+            <div>
+                <h1>Contacto</h1>
+            </div>
+            <div>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1673.7935179159035!2d-68.84734126136631!3d-32.96191079339675!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e0ba5f302a7af%3A0xb6b54bc913b01a74!2sCafayate%20612%2C%20Luj%C3%A1n%20de%20Cuyo%2C%20Mendoza!5e0!3m2!1ses!2sar!4v1712606225138!5m2!1ses!2sar" width="600" height="450" style="border:0;" allowfullscreen="" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+            <div>
+                <form>
+                    <label for="nombre">Nombre</label>
+                    <input type="text" name="name" id="nombre" placeholder="Natalia">
+                    <label for="apellido">Apellido</label>
+                    <input type="text" name="apellido" id="apellido" placeholder="Morales">
+                    <label for="email">Mail</label>
+                    <input type="email" name="correo" id="email" placeholder="nombre@correo.com">
+                    <label for="celular">Teléfono</label>
+                    <input type="tel" name="tel" id="celular" placeholder="+5492615555555">
+                    <label for="mensaje">Mensaje</label>
+                    <textarea name="message" id="mensaje" cols="30" rows="10"></textarea>
+                    <input type="submit" value="Enviar" class="btn-submit">
+                </form>
+            </div>
         </section>
     </main>
-    <section>
-        <h2><em>"Un espacio para consolidar la identidad cultural y para intercambiar ideas".</em></h2>
-        <article>
-            <h3><a href="./pages/libros.html">Libros</a></h3>
-            <p> Contamos con una gran cantidad de libros de diversos géneros y para todas las edades . Acercate y dales un vistazo.</p>    
-        </article>
-        <article>
-            <h3><a href="./pages/talleres.html">Talleres</a></h3>
-            <p>Los talleres que se dictan son diversos y dirigidos a distintas edades. Apuntados a ofrecer actividades de ocio, diversión, entretenimiento y aprendizaje.</p>
-        </article>
-    </section>
     <footer>
         <nav>
             <ul>
                 <li><a href="https://www.whatsapp.com/" target="_blank"><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-whatsapp" viewBox="0 0 16 16">
                     <path d="M13.601 2.326A7.85 7.85 0 0 0 7.994 0C3.627 0 .068 3.558.064 7.926c0 1.399.366 2.76 1.057 3.965L0 16l4.204-1.102a7.9 7.9 0 0 0 3.79.965h.004c4.368 0 7.926-3.558 7.93-7.93A7.9 7.9 0 0 0 13.6 2.326zM7.994 14.521a6.6 6.6 0 0 1-3.356-.92l-.24-.144-2.494.654.666-2.433-.156-.251a6.56 6.56 0 0 1-1.007-3.505c0-3.626 2.957-6.584 6.591-6.584a6.56 6.56 0 0 1 4.66 1.931 6.56 6.56 0 0 1 1.928 4.66c-.004 3.639-2.961 6.592-6.592 6.592m3.615-4.934c-.197-.099-1.17-.578-1.353-.646-.182-.065-.315-.099-.445.099-.133.197-.513.646-.627.775-.114.133-.232.148-.43.05-.197-.1-.836-.308-1.592-.985-.59-.525-.985-1.175-1.103-1.372-.114-.198-.011-.304.088-.403.087-.088.197-.232.296-.346.1-.114.133-.198.198-.33.065-.134.034-.248-.015-.347-.05-.099-.445-1.076-.612-1.47-.16-.389-.323-.335-.445-.34-.114-.007-.247-.007-.38-.007a.73.73 0 0 0-.529.247c-.182.198-.691.677-.691 1.654s.71 1.916.81 2.049c.098.133 1.394 2.132 3.383 2.992.47.205.84.326 1.129.418.475.152.904.129 1.246.08.38-.058 1.171-.48 1.338-.943.164-.464.164-.86.114-.943-.049-.084-.182-.133-.38-.232"/>
-                    </svg></a> WhatsApp: 261-6917145</li>
+                </svg></a> WhatsApp: 261-6917145</li>
 
                 <li><a href="https://www.google.com.ar/maps/@-33.0235904,-68.8750592,14z?entry=ttu" target="_blank">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-geo-alt-fill" viewBox="0 0 16 16">
@@ -56,13 +65,12 @@
                     </svg></a> Cafayate 612, Mendoza</li>
 
                 <li><svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-clock" viewBox="0 0 16 16">
-                        <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
-                        <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
-                    </svg> Lunes a Viernes: 8:00 a 20:00 </li>
+                    <path d="M8 3.5a.5.5 0 0 0-1 0V9a.5.5 0 0 0 .252.434l3.5 2a.5.5 0 0 0 .496-.868L8 8.71z"/>
+                    <path d="M8 16A8 8 0 1 0 8 0a8 8 0 0 0 0 16m7-8A7 7 0 1 1 1 8a7 7 0 0 1 14 0"/>
+                </svg> Lunes a Viernes: 8:00 a 20:00 </li>
             </ul>
         </nav>
         <p>Copyright 2024 Biblioteca Municipal. Todos los derechos reservados.</p>
     </footer>
-    <script src="./JS/main.js"></script>
 </body>
 </html>
