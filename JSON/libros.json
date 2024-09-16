@@ -1,0 +1,67 @@
+{
+    "libros": [
+        {
+            "id": 1,
+            "nombre": "La tía Cósima",
+            "autor": "Florencia Bonelli",
+            "categoria": "Novela",
+            "reservado": false
+        },
+        {
+            "id": 2,
+            "nombre": "Irulana y el Ogronte",
+            "autor": "Graciela Montes",
+            "categoria": "Infantil",
+            "reservado": false
+        },
+        {
+            "id": 3,
+            "nombre": "Cornelia",
+            "autor": "Florencia Etcheves",
+            "categoria": "Novela",
+            "reservado": false
+        },
+        {
+            "id": 4,
+            "nombre": "La Isla Bajo el Mar",
+            "autor": "Isabel Allende",
+            "categoria": "Novela",
+            "reservado": false
+        },
+        {
+            "id": 5,
+            "nombre": "La Leyenda del bicho Colorado",
+            "autor": "Gustavo Roldan",
+            "categoria": "Infantil",
+            "reservado": false
+        },
+        {
+            "id": 6,
+            "nombre": "Harry Potter y la Piedra Filosofal",
+            "autor": "J.K.Rowling",
+            "categoria": "Ficción",
+            "reservado": false
+        },
+        {
+            "id": 7,
+            "nombre": "El Evangelio Según Jesucristo",
+            "autor": "José Saramago",
+            "categoria": "Novela",
+            "reservado": false
+        },
+        {
+            "id": 8,
+            "nombre": "Sapo en Buenos Aires",
+            "autor": "Gustavo Roldán",
+            "categoria": "Infantil",
+            "reservado": false
+        },
+        {
+            "id": 9,
+            "nombre": "El problema de los tres Cuerpos",
+            "autor": "Cixin Liu",
+            "categoria": "Ficción",
+            "reservado": false
+        }
+    ]
+}

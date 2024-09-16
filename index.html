@@ -5,44 +5,34 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Sitio web Biblioteca Municipal. Variedad de libros y talleres.">
     <meta name="keywords" content="biblioteca, libros, talleres, comunidad, municipal">
-    <title>Proyecto JavaScript Biblioteca Municipal</title>
+    <title>Biblioteca Municipal</title>
+    <link rel="stylesheet" href="./CSS/styles.css">
 </head>
 <body>
-    <header>
-        <nav>
-            <ul>
-                <li>
-                    <a href="./pages/nosotros.html">Nosotros</a>
-                </li>
-                <li>
-                    <a href="./pages/libros.html">Libros</a>
-                </li>
-                <li>
-                    <a href="./pages/talleres.html">Talleres</a>
-                </li>
-                <li>
-                    <a href="./pages/contacto.html">Contacto</a>
-                </li>
-            </ul>
-        </nav>
-    </header>
-    <main>
-        <section>
-            <h1>Biblioteca Municipal</h1>
-            <p>Disponibilidad de libros y talleres para todas las edades. Una manera divertida de conocer e interactuar con la comunidad.</p>
-        </section>
-    </main>
-    <section>
-        <h2><em>"Un espacio para consolidar la identidad cultural y para intercambiar ideas".</em></h2>
-        <article>
-            <h3><a href="./pages/libros.html">Libros</a></h3>
-            <p> Contamos con una gran cantidad de libros de diversos géneros y para todas las edades . Acercate y dales un vistazo.</p>    
-        </article>
-        <article>
-            <h3><a href="./pages/talleres.html">Talleres</a></h3>
-            <p>Los talleres que se dictan son diversos y dirigidos a distintas edades. Apuntados a ofrecer actividades de ocio, diversión, entretenimiento y aprendizaje.</p>
-        </article>
-    </section>
+    <div class="container">
+        <h1>Biblioteca Municipal</h1>
+        <h2>Bienvenido a la sección de Reservas</h2>
+        <p>Los libros sirven para la búsqueda de conocimiento y para aumentar la cultura, para entretener, enseñar y difundir. Aquí encontrarás libros para todas las edades.</p>
+        <p>Reservá tus libros ahora!</p>
+
+        <div id="product-menu">
+            <button id="btnNovela" class="button button-primary">Novela</button>
+            <button id="btnFiccion" class="button button-secondary">Ficción</button>
+            <button id="btnInfantil" class="button button-secondary">Infantil</button>
+        </div>
+
+        <div id="books" class="books"></div>
+
+        <div class="cart">
+            <h3>Tus Reservas:</h3>
+            <div id="cart-items"></div>
+            <button id="btnFinalizarReserva" class="button button-primary">Finalizar Reserva</button>
+            <button id="btnEliminarReservas" class="button button-primary">Eliminar Reservas</button>
+        </div>
+
+        <div id="saludoFinal"></div>
+
+    </div>
     <footer>
         <nav>
             <ul>

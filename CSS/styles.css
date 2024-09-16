@@ -1,0 +1,115 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap");
+
+body {
+    font-family: "Poppins", sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #D3CBDB;
+}
+
+.container {
+    max-width: 800px;
+    margin: auto;
+    padding: 20px;
+    background-color: #ece6df;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color:  #a882cc;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+}
+
+p {
+    text-align: center;
+    color: #333;
+}
+
+#product-menu {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.button {
+    padding: 10px 20px;
+    margin: 5px;
+    border: none;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.button-primary {
+    background-color:  #b497d0;
+}
+
+.button-primary:hover {
+    background-color:  #9d61d4;
+}
+
+.button-secondary {
+    background-color: #b497d0;
+}
+
+.button-secondary:hover {
+    background-color: #9d61d4;
+}
+
+.books, .cart {
+    margin-bottom: 20px;
+}
+
+.books-item {
+    margin-bottom: 10px;
+}
+
+#cart-items {
+    margin-top: 20px;
+}
+
+#cart-items div {
+    margin-bottom: 10px;
+}
+
+footer {
+    background-color: #D3CBDB;
+    padding-top: 2rem;
+    padding-bottom: 2rem;
+}
+footer nav ul {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+footer nav ul li {
+    color: rgb(96, 86, 86);
+    font-family: "Poppins", sans-serif;
+    font-weight: 400;
+    font-size: 1rem;
+    font-style: normal;
+    list-style-type: none;
+}
+
+footer nav ul li svg {
+    color: rgb(96, 86, 86);
+    width: 1rem;
+    height: 1rem;
+}
+footer p {
+    color: rgb(96, 86, 86);
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    font-size: 1rem;
+    padding-left: 0.5rem;
+    padding-bottom: 0.5rem;
+}

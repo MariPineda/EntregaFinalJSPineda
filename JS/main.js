@@ -1,89 +1,110 @@
-function saludar(){
-    alert("Bienvenido a nuestra Biblioteca Municipal " + nombre);
-}
-function elegir(){
-    opcionMenu = prompt("Elija una opción: \n 1: Reservar libro\n 2: Finalizar reserva\n 3: Salir sin reservar");
-}
-function reservarLibro(){
-    opcionCategoria = prompt("Ingrese el tipo de libro que desea reservar: \n 1 - Novela \n 2 - Ficción \n 3 - Infantil ");
-    if (opcionCategoria === "1"){
-        const novelas = libros.filter((libro) => libro.categoria.includes("Novela"));
-        novelas.forEach((novela) => {
-            alert("Estas son las opciones, recuerde el número de id del libro que desea elegir: \n" + "id " + (novela.id) + ": " + (novela.nombre) + ", " + (novela.autor));
+const filtrarLibros = (categoria) => {
+    return libros.filter((libro) => libro.categoria === categoria);
+};
+
+const mostrarCategoria = (categoria) => {
+    const librosFiltrados = filtrarLibros(categoria);
+    const librosDiv = document.getElementById('books');
+    librosDiv.innerHTML = '';
+
+    librosFiltrados.forEach((libro, index) => {
+        const libroDiv = document.createElement('div');
+        libroDiv.classList.add('book-item');
+        libroDiv.innerHTML = `
+            ${index + 1}. ${libro.nombre} - ${libro.autor}
+            <button class="button button-primary" data-index="${index}" data-categoria="${categoria}">Reservar</button>
+        `;
+        librosDiv.appendChild(libroDiv);
+    });
+
+    document.querySelectorAll('.book-item button').forEach(button => {
+        button.addEventListener('click', (event) => {
+            const index = event.target.getAttribute('data-index');
+            const categoria = event.target.getAttribute('data-categoria');
+            agregarReserva(index, categoria);
         });
-        let idSeleccionado = prompt("Escriba el número de id del libro elegido: ");
-        const novelaElegida = novelas.find((novela) => novela.id === idSeleccionado);
-        if (novelaElegida){
-            alert("Usted eligió el libro: " + novelaElegida.nombre + " de " + novelaElegida.autor);
-            sumaLibro1 += 1;
-            novelaElegida.reservar();
-            console.log(novelaElegida);
-        }
-        else {
-            alert("Usted no ingresó un número válido de id!") 
-            reservarLibro();
-        }
-        elegir();
+    });
+};
+
+const agregarReserva = (index, categoria) => {
+    const libro = filtrarLibros(categoria)[index];
+    reservas.push(libro);
+    libro.reservado = true;
+    guardarReservasLocalStorage(); 
+    mostrarReservas();
+};
+
+const mostrarReservas = () => {
+    const cartItemsDiv = document.getElementById('cart-items');
+    cartItemsDiv.innerHTML = '';
+
+    reservas.forEach((libro) => {
+        const itemDiv = document.createElement('div');
+        itemDiv.innerHTML = `
+        Libro: ${libro.nombre}, Autor: ${libro.autor}
+        `;
+        cartItemsDiv.appendChild(itemDiv);
+    });
+
+    const totalDiv = document.createElement('div');
+    totalDiv.innerHTML = `Total: ${calcularTotal()}`;
+    cartItemsDiv.appendChild(totalDiv);
+};
+
+const calcularTotal = () => {
+    return `Usted ha reservado:  ${reservas.length} libro/s` ;
+};
+
+const guardarReservasLocalStorage = () => {
+    localStorage.setItem('reservas', JSON.stringify(reservas));
+};
+
+const cargarReservasLocalStorage = () => {
+    const reservasGuardado = localStorage.getItem('reservas');
+    if (reservasGuardado) {
+        reservas = JSON.parse(reservasGuardado);
+        mostrarReservas(); 
     }
-    else if (opcionCategoria === "2"){
-        const ficciones = libros.filter((libro) => libro.categoria.includes("Ficción"));
-        ficciones.forEach((ficcion) => {
-            alert("Estas son las opciones, recuerde el número de id del libro que desea elegir: \n" + "id " + (ficcion.id) + ": " + (ficcion.nombre) + ", " + (ficcion.autor));
-        });
-        let idSeleccionado = prompt("Escriba el número de id del libro elegido: ");
-        const ficcionElegida = ficciones.find((ficcion) =>ficcion.id === idSeleccionado);
-        if (ficcionElegida){
-            alert("Usted eligió el libro: " + ficcionElegida.nombre + " de " + ficcionElegida.autor);
-            sumaLibro2 += 1;
-            ficcionElegida.reservar();
-        }
-        else {
-            alert("Usted no ingresó un número válido de id!") 
-            reservarLibro();
-        }
-        elegir();
-    }
-    else if(opcionCategoria === "3"){
-        const infantiles = libros.filter((libro) => libro.categoria.includes("Infantil"));
-        infantiles.forEach((infantil) => {
-            alert("Estas son las opciones, recuerde el número de id del libro que desea elegir: \n" + "id " + (infantil.id) + ": " + (infantil.nombre) + ", " + (infantil.autor));
-        });
-        let idSeleccionado = prompt("Escriba el número de id del libro elegido: ");
-        const infantilElegida = infantiles.find((infantil) =>infantil.id === idSeleccionado);
-        if (infantilElegida){
-            alert("Usted eligió el libro: " + infantilElegida.nombre + " de " + infantilElegida.autor);
-            sumaLibro3 += 1;
-            infantilElegida.reservar();
-        }
-        else {
-            alert("Usted no ingresó un número válido de id!") 
-            reservarLibro();
-        }
-        elegir();
-        }
-    else{
-        alert("No ingresaste un número, vuelve a intentar");
-        elegir();
-    }
-}
-function finalizaReserva(){
-    if(sumaLibro1 > 0 || sumaLibro2 > 0 || sumaLibro3 > 0){
-        const seleccionados = libros.filter((libro) => libro.reservado);
-        let sumaLibros = sumaLibro1 + sumaLibro2 + sumaLibro3;
-        console.log(seleccionados);
-        seleccionados.forEach((seleccionado) => {
-            alert("Usted ha reservado: \n" + seleccionado.nombre + " de " + seleccionado.autor);
-        });
-        alert("Usted ha reservado un total de: " + sumaLibros + " libros\n" + "\n" + sumaLibro1 + " novelas " + "\n" + sumaLibro2 + " ficciones " + "\n" + sumaLibro3 + " infantiles ");
-    }
-    else{
-        alert("Usted no ha reservado libros");
-        opcion = "3"
-    }
-}
-function saludarFinal(){
-    alert("Gracias por ser parte de la Bliblioteca Municipal!");
-}
+};
+
+const finalizarReserva = () => { 
+    reservas.length > 0 ? finalizarReservaSaludo() : FinalizarSinReservas();
+};
+
+let btnEliminarReservas = document.getElementById('btnEliminarReservas');
+btnEliminarReservas.addEventListener('click', () => {
+    reservas.pop();
+    mostrarReservas();
+    guardarReservasLocalStorage();
+})
+
+const finalizarReservaSaludo = () => {
+    const mensaje = document.createElement("p");
+    mensaje.textContent = 'Gracias por ser parte de la biblioteca! Tus libros han sido reservados!';
+    const saludoFinal = document.getElementById("saludoFinal");
+    saludoFinal.parentNode.insertBefore(mensaje, saludoFinal);
+    setTimeout(function() {
+        mensaje.remove();
+    }, 3000);
+    reservas = [];
+    guardarReservasLocalStorage();  
+    mostrarReservas();
+};
+
+const FinalizarSinReservas = () => {
+    const mensajeSinReservas = document.createElement("p");
+    mensajeSinReservas.textContent = 'No ha reservado ningún libro!';
+    const saludoFinal = document.getElementById("saludoFinal");
+    saludoFinal.parentNode.insertBefore(mensajeSinReservas, saludoFinal);
+    setTimeout(function() {
+        mensajeSinReservas.remove();
+    }, 3000);
+    reservas = [];
+    guardarReservasLocalStorage();  
+    mostrarReservas();
+};
+
+const libros = [];
 
 class Libro {
     constructor (id, nombre, autor, categoria) {
@@ -98,14 +119,6 @@ class Libro {
     }
 }
 
-let nombre = prompt("Ingrese su nombre: ");
-let opcionMenu;
-let opcionCategoria;
-let sumaLibro1 = 0;
-let sumaLibro2 = 0;
-let sumaLibro3 = 0;
-const libros = [];
-
 libros.push(new Libro ("1", "La tía Cósima", "Florencia Bonelli", "Novela"));
 libros.push(new Libro("2","Irulana y el Ogronte", "Graciela Montes", "Infantil"));
 libros.push(new Libro ("3","Cornelia", "Florencia Etcheves", "Novela"));
@@ -116,24 +129,13 @@ libros.push(new Libro("7","El Evangelio Según Jesucristo", "José Saramago", "N
 libros.push(new Libro("8","Sapo en Buenos Aires", "Gustavo Roldán", "Infantil"));
 libros.push(new Libro("9","El problema de los tres Cuerpos", "Cixin Liu", "Ficción"));
 
-saludar();
-elegir();
+let reservas = [];
 
-while (opcionMenu !== "3"){
-    if (opcionMenu === "1"){
-        reservarLibro();
-    }
-    else if (opcionMenu === "2"){
-        finalizaReserva();
-        saludarFinal();
-        opcionMenu = "3";
-    }
-    else {
-        alert("No ingresaste un número, vuelve a intentar");
-        elegir();
-    }
-}
-if(opcionMenu === "3"){
-    alert("Usted salió del sistema");
-}
+cargarReservasLocalStorage();  
+mostrarCategoria('Novela');
 
+document.getElementById('btnFinalizarReserva').addEventListener('click', finalizarReserva);
+
+document.getElementById('btnNovela').addEventListener('click', () => mostrarCategoria('Novela'));
+document.getElementById('btnFiccion').addEventListener('click', () => mostrarCategoria('Ficción'));
+document.getElementById('btnInfantil').addEventListener('click', () => mostrarCategoria('Infantil'));
