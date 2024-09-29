@@ -1,7 +1,7 @@
-# Biblioteca Municipal: Reserva virtual de libros - EntregaFinalJS3Pineda 
+# Biblioteca Municipal: Reserva virtual de libros - EntregaFinalJSPineda 
 
 ## Descripción
-Este proyecto es una biblioteca municipal que permite a los usuarios registrarse, buscar libros por categoría, y reservar libros de manera virtual. Está desarrollado en JavaScript y utiliza `fetch`, `async`, `await`, `try`, y `catch` para manejar las solicitudes a una API. Tiene un diseño básico en CSS.
+Este proyecto es una biblioteca municipal que permite a los usuarios registrarse, buscar libros por categoría, y reservar libros de manera virtual. Está desarrollado en JavaScript y utiliza `fetch`, `async`, `await`, `try`, y `catch` para manejar las solicitudes a un archivo JSON. Tiene un diseño básico en CSS.
 
 ## Tabla de Contenidos
 - Instalación

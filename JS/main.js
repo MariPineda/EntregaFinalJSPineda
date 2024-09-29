@@ -96,7 +96,7 @@ const cargarReservasLocalStorage = () => {
 };
 
 const finalizarReserva = () => { 
-    reservas.length > 0 ? finalizarReservaSaludo() : FinalizarSinReservas(); 
+    reservas.length > 0 ? finalizarReservaSaludo() : finalizarSinReservas(); 
 };
 
 let btnEliminarReservas = document.getElementById('btnEliminarReservas');
@@ -150,7 +150,7 @@ const finalizarReservaSaludo = () => {
     mostrarReservas();
 };
 
-const FinalizarSinReservas = () => {
+const finalizarSinReservas = () => {
     Swal.fire({
         icon: "error",
         title: "Uy!!!...",
