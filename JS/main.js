@@ -1,12 +1,41 @@
+function validarNombre(nombre) {
+    return nombre.trim().length > 0;
+}
+
+function validarEmail(email) {
+    const regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    return regex.test(email);
+}
+
+function validarPassword(password) {
+    return password.length >= 8;
+}
+
+const obtenerLibros = async () => {
+    try {
+        const respuesta = await fetch ('./JSON/libros.json');
+        if (!respuesta.ok) {
+            throw new Error (`Error al obtener el listado de libros: Código error: ${respuesta.status}`);
+        }
+        const data = await respuesta.json();
+        libros = Array.isArray(data) ? data : Object.values(data).flat();//
+        return libros;
+    } catch (error) {
+        console.error (`Hubo problemas con el fetch: `, error);
+        return [];
+    }
+};
+
 const filtrarLibros = (categoria) => {
     return libros.filter((libro) => libro.categoria === categoria);
 };
 
-const mostrarCategoria = (categoria) => {
+const mostrarCategoria = async (categoria) => {
+    await obtenerLibros();
+    console.log(libros);
     const librosFiltrados = filtrarLibros(categoria);
     const librosDiv = document.getElementById('books');
     librosDiv.innerHTML = '';
-
     librosFiltrados.forEach((libro, index) => {
         const libroDiv = document.createElement('div');
         libroDiv.classList.add('book-item');
@@ -16,7 +45,6 @@ const mostrarCategoria = (categoria) => {
         `;
         librosDiv.appendChild(libroDiv);
     });
-
     document.querySelectorAll('.book-item button').forEach(button => {
         button.addEventListener('click', (event) => {
             const index = event.target.getAttribute('data-index');
@@ -56,7 +84,7 @@ const calcularTotal = () => {
 };
 
 const guardarReservasLocalStorage = () => {
-    localStorage.setItem('reservas', JSON.stringify(reservas));
+    localStorage.setItem('reservas', JSON.stringify(reservas)) || []; 
 };
 
 const cargarReservasLocalStorage = () => {
@@ -68,74 +96,114 @@ const cargarReservasLocalStorage = () => {
 };
 
 const finalizarReserva = () => { 
-    reservas.length > 0 ? finalizarReservaSaludo() : FinalizarSinReservas();
+    reservas.length > 0 ? finalizarReservaSaludo() : FinalizarSinReservas(); 
 };
 
 let btnEliminarReservas = document.getElementById('btnEliminarReservas');
 btnEliminarReservas.addEventListener('click', () => {
-    reservas.pop();
-    mostrarReservas();
-    guardarReservasLocalStorage();
+    borrarReserva()
 })
 
+const borrarReserva = () => {
+    if (reservas.length === 0){
+        Swal.fire({
+            icon: "error",
+            title: "Uy!!!...",
+            text: "No ha reservado ningún libro!"
+        });
+        reservas = [];
+        guardarReservasLocalStorage();  
+        mostrarReservas();
+    } else {
+        Swal.fire({
+            title: "Estás seguro de borrar tu reserva?",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Sí, deseo borrar la reserva!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: "Reserva borrada!",
+                    text: "Tu reserva fue borrada!",
+                    icon: "success"
+                });
+            reservas.pop();
+            mostrarReservas();
+            guardarReservasLocalStorage();
+            }
+        });
+    }
+}
+
 const finalizarReservaSaludo = () => {
-    const mensaje = document.createElement("p");
-    mensaje.textContent = 'Gracias por ser parte de la biblioteca! Tus libros han sido reservados!';
-    const saludoFinal = document.getElementById("saludoFinal");
-    saludoFinal.parentNode.insertBefore(mensaje, saludoFinal);
-    setTimeout(function() {
-        mensaje.remove();
-    }, 3000);
+    Swal.fire({
+        position: "top-end",
+        icon: "success",
+        title: "Tus libros han sido reservados!",
+        showConfirmButton: false,
+        timer: 3000
+    });
     reservas = [];
     guardarReservasLocalStorage();  
     mostrarReservas();
 };
 
 const FinalizarSinReservas = () => {
-    const mensajeSinReservas = document.createElement("p");
-    mensajeSinReservas.textContent = 'No ha reservado ningún libro!';
-    const saludoFinal = document.getElementById("saludoFinal");
-    saludoFinal.parentNode.insertBefore(mensajeSinReservas, saludoFinal);
-    setTimeout(function() {
-        mensajeSinReservas.remove();
-    }, 3000);
+    Swal.fire({
+        icon: "error",
+        title: "Uy!!!...",
+        text: "No ha reservado ningún libro!"
+    });
     reservas = [];
     guardarReservasLocalStorage();  
     mostrarReservas();
 };
 
-const libros = [];
+document.getElementById('registroForm').addEventListener('submit', function(event) {
+    event.preventDefault(); 
+    const { nombre, email, password } = event.target.elements; 
 
-class Libro {
-    constructor (id, nombre, autor, categoria) {
-        this.id = id;
-        this.nombre = nombre;
-        this.autor = autor;
-        this.categoria = categoria;
-        this.reservado = false;
+    document.getElementById('nombreError').textContent = '';
+    document.getElementById('emailError').textContent = '';
+    document.getElementById('passwordError').textContent = '';
+
+    let valid = true;
+
+    if (!validarNombre(nombre.value)) {
+        document.getElementById('nombreError').textContent = 'Por favor, ingresa un nombre válido.';
+        valid = false;
     }
-    reservar() {
-        this.reservado = true;
+
+    if (!validarEmail(email.value)) {
+        document.getElementById('emailError').textContent = 'Por favor, ingresa un correo electrónico válido.';
+        valid = false;
     }
-}
 
-libros.push(new Libro ("1", "La tía Cósima", "Florencia Bonelli", "Novela"));
-libros.push(new Libro("2","Irulana y el Ogronte", "Graciela Montes", "Infantil"));
-libros.push(new Libro ("3","Cornelia", "Florencia Etcheves", "Novela"));
-libros.push(new Libro ("4","La Isla Bajo el Mar", "Isabel Allende", "Novela"));
-libros.push(new Libro("5","La Leyenda del bicho Colorado", "Gustavo Roldan", "Infantil"));
-libros.push(new Libro("6","Harry Potter y la Piedra Filosofal", "J.K.Rowling", "Ficción"));
-libros.push(new Libro("7","El Evangelio Según Jesucristo", "José Saramago", "Novela"));
-libros.push(new Libro("8","Sapo en Buenos Aires", "Gustavo Roldán", "Infantil"));
-libros.push(new Libro("9","El problema de los tres Cuerpos", "Cixin Liu", "Ficción"));
+    if (!validarPassword(password.value)) {
+        document.getElementById('passwordError').textContent = 'La contraseña debe tener al menos 8 caracteres.';
+        valid = false;
+    }
 
-let reservas = [];
+    if (valid) {
+        document.getElementById('registroForm').classList.add('hidden');
+        document.getElementById('pantallaInicio').classList.add('hidden');
+        document.getElementById('biblioteca').classList.remove('hidden');
+    }
+});
 
-cargarReservasLocalStorage();  
-mostrarCategoria('Novela');
+document.addEventListener('DOMContentLoaded', () => {
+    mostrarCategoria('Novela');
+});
 
 document.getElementById('btnFinalizarReserva').addEventListener('click', finalizarReserva);
 
 document.getElementById('btnNovela').addEventListener('click', () => mostrarCategoria('Novela'));
 document.getElementById('btnFiccion').addEventListener('click', () => mostrarCategoria('Ficción'));
 document.getElementById('btnInfantil').addEventListener('click', () => mostrarCategoria('Infantil'));
+
+let libros = [];
+let reservas = [];
+
+cargarReservasLocalStorage(); 

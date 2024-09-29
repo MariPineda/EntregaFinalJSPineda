@@ -31,6 +31,42 @@ p {
     color: #333;
 }
 
+.error {
+    font-family: "Poppins", sans-serif;
+    color: rgb(243, 67, 67);
+    font-size: 0.9em;
+}
+
+.hidden {
+    display: none;
+}
+
+.containerForm {
+    color:black;
+    padding: 20px;
+    border-radius: 5px;
+    box-shadow: opx opx 10px rgba(0, 0, 0, 0.1);
+}
+
+#btnForm {
+    background-color: #a882cc;
+    font-family: "Poppins", sans-serif;
+    font-size: 1rem;
+    color:whitesmoke;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btnForm:hover {
+    background-color: #b497d0;
+}
+
+#btnForm:active {
+    background-color: #b497d0;
+}
+
 #product-menu {
     text-align: center;
     margin-bottom: 20px;
@@ -82,7 +118,10 @@ footer {
     background-color: #D3CBDB;
     padding-top: 2rem;
     padding-bottom: 2rem;
+    padding-left: 1rem;
+    padding-right: 1rem;
 }
+
 footer nav ul {
     display: flex;
     flex-direction: row;
@@ -104,6 +143,7 @@ footer nav ul li svg {
     width: 1rem;
     height: 1rem;
 }
+
 footer p {
     color: rgb(96, 86, 86);
     display: flex;
@@ -113,3 +153,4 @@ footer p {
     padding-left: 0.5rem;
     padding-bottom: 0.5rem;
 }
+
